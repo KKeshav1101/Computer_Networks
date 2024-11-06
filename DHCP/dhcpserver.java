@@ -12,9 +12,9 @@ public class dhcpserver{
 					PrintWriter out= new PrintWriter(socket.getOutputStream(),true);
 					BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))){
 						System.out.println("Client Connected..");
-						String reuqest=in.readLine();
+						String request=in.readLine();
 						if("REQUEST_IP".equals(request)){
-							String allocatedIp=allocatedIpAddress();
+							String allocatedIp=allocateIpAddress();
 							out.println(allocatedIp);
 						}else{
 							out.println("Invalid request");
@@ -28,13 +28,13 @@ public class dhcpserver{
 		}
 	}
 	
-	private static void synchronized String allocateIpAddress(){
-		if(availableCount=0){
-			return "no ip address available"
+	private static synchronized String allocateIpAddress(){
+		if(availableCount==0){
+			return "no ip address available";
 		}
 		String allocatedIp=ipAddressPool[0];
 		for(int i=0;i<availableCount-1;i++){
-			ipAddresssPool[i]=ipAddressPool[i+1];
+			ipAddressPool[i]=ipAddressPool[i+1];
 		}
 		ipAddressPool[availableCount-1]=null;
 		availableCount--;
