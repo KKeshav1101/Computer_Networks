@@ -1,5 +1,0 @@
-hello there
-this is a sample
-multi line text file
-lorem ipsum dolor
-bye
